@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom's Festive Corner</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 20px; background: #fdfdfd; }
+        .container { max-width: 400px; margin: auto; border: 1px solid #eee; border-radius: 15px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { color: #d35400; margin-bottom: 5px; }
+        p { color: #7f8c8d; font-size: 0.9em; }
+        input { width: 90%; padding: 12px; margin: 20px 0; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; }
+        button { background: #27ae60; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; width: 100%; }
+        .upi-icons { margin-top: 15px; opacity: 0.6; font-size: 0.8em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mom's Flower Corner</h1>
+        <p>Navi Mumbai - Fresh Daily</p>
+        
+        <div style="background: #fff3e0; padding: 15px; border-radius: 10px; margin-top: 15px;">
+            <label for="customer_mobile">Enter Mobile for Digital Bill:</label>
+            <input type="tel" id="customer_mobile" placeholder="98XXXXXXXX" pattern="[0-9]{10}">
+            
+            <button onclick="handlePayment()">PAY WITH UPI NOW</button>
+        </div>
+
+        <div class="upi-icons">Accepted: GPay, PhonePe, Paytm, BHIM</div>
+    </div>
+
+    <script>
+        function handlePayment() {
+            const mobile = document.getElementById('customer_mobile').value;
+            const upiId = "YOUR_MOMS_UPI@bank"; // <-- CHANGE THIS
+            const momName = "AvinashsMom"; // <-- CHANGE THIS
+            
+            // 1. Background Lead Capture (Google Form)
+            if(mobile.length === 10) {
+                const formID = "YOUR_FORM_ID_HERE"; // <-- CHANGE THIS (from the URL)
+                const entryID = "entry.1234567"; // <-- CHANGE THIS (from Step 1)
+                
+                const remoteURL = `https://docs.google.com/forms/d/e/${formID}/formResponse?${entryID}=${mobile}&submit=Submit`;
+                
+                // Use beacon or image ping for "fire and forget" background logging
+                const img = new Image();
+                img.src = remoteURL;
+            }
+
+            // 2. Immediate UPI Launch
+            const upiUrl = `upi://pay?pa=${upiId}&pn=${momName}&cu=INR`;
+            window.location.href = upiUrl;
+        }
+    </script>
+</body>
+</html>
