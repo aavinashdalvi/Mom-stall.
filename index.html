@@ -21,23 +21,29 @@
 
 <script>
     function runTest() {
-        const log = document.getElementById('log');
+const log = document.getElementById('log');
         
-        // 1. Log Step 1
         log.innerText = "Step 1: Launching UPI App...";
         
-        // TEST DATA (Replace with yours for final check)
-        const testUpi = "avinash@upi"; 
-        const testWA = "91XXXXXXXXXX";
+        // --- PRODUCTION DATA ---
+        const upiId = "9870006765@ptsbi"; // Replace with your mom's ID
+        const waNumber = "919920980011"; // Must start with 91, no '+' or spaces
+        const momName = "MomsFlowerCorner";
 
-        // Trigger UPI
-        window.location.href = `upi://pay?pa=${testUpi}&pn=TestUser&cu=INR`;
+        // 1. Launch UPI Intent
+        window.location.href = upi://pay?pa=${upiId}&pn=${momName}&cu=INR&mode=02;
 
-        // 2. Log Step 2
+        // 2. The WhatsApp Redirect (Hardened for 404 Prevention)
         setTimeout(() => {
-            log.innerText = "Step 2: Switching to WhatsApp for Bill...";
-            window.location.href = `https://wa.me/${testWA}?text=Test%20Successful!%20Send%20my%20bill.`;
-        }, 2500);
+            log.innerText = "Step 2: Opening WhatsApp for Receipt...";
+            
+            // Using api.whatsapp.com is more stable for redirects than wa.me
+            const message = "Hi! I just paid for flowers. Please send my digital bill.";
+            const encodedMessage = encodeURIComponent(message);
+            const waUrl = https://api.whatsapp.com/send?phone=${waNumber}&text=${encodedMessage};
+            
+            window.location.href = waUrl;
+        }, 3500); // Increased to 3.5s to ensure UPI app takes priority
     }
 </script>
 
