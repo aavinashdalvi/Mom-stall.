@@ -31,13 +31,13 @@
     <script>
         function handlePayment() {
             const mobile = document.getElementById('customer_mobile').value;
-            const upiId = "YOUR_MOMS_UPI@bank"; // <-- CHANGE THIS
+            const upiId = "9870006765@ybl"; // <-- CHANGE THIS
             const momName = "AvinashsMom"; // <-- CHANGE THIS
             
             // 1. Background Lead Capture (Google Form)
             if(mobile.length === 10) {
-                const formID = "YOUR_FORM_ID_HERE"; // <-- CHANGE THIS (from the URL)
-                const entryID = "entry.1234567"; // <-- CHANGE THIS (from Step 1)
+                const formID = "1FAIpQLScoVyzgXwOHY0TCpM-r0AtlbVNRXOrrNQlpyoQqzVuCU394tg"; // <-- CHANGE THIS (from the URL)
+                const entryID = "entry.1513550986"; // <-- CHANGE THIS (from Step 1)
                 
                 const remoteURL = `https://docs.google.com/forms/d/e/${formID}/formResponse?${entryID}=${mobile}&submit=Submit`;
                 
